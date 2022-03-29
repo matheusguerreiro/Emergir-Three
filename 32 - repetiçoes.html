@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Repetições</title>
+</head>
+<body>
+  
+  <script>
+    let n = prompt('Digite um Número: ')
+    let r = prompt('Repetições: ')
+
+    document.write('for <br>')
+    for (let i = 0; i <= r; i++) {
+      document.write(`${n} X ${i} = ${n * i} <br>`)
+    }
+
+    document.write('while <br>')
+    let i2 = 0
+    while (i2 <= r) {
+      document.write(`${n} X ${i2} = ${n * i2} <br>`)
+      i2++
+    }
+
+    document.write('do - while <br>')
+    let i3 = 0
+    do {
+      document.write(`${n} X ${i3} = ${n * i3} <br>`)
+      i3++
+    } while (i3 <= r)
+
+    // break - interrompe o loop e sai fora
+    // continue - interrompe o loop mas segue
+
+  </script>
+</body>
+</html>
