@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>array.from() e array.of()</title>
+</head>
+<body>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis blanditiis laudantium repellendus ullam sit quae commodi nesciunt assumenda, nam voluptatum reprehenderit facere rerum a nemo? Quas vero repellendus reprehenderit reiciendis.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis blanditiis laudantium repellendus ullam sit quae commodi nesciunt assumenda, nam voluptatum reprehenderit facere rerum a nemo? Quas vero repellendus reprehenderit reiciendis.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis blanditiis laudantium repellendus ullam sit quae commodi nesciunt assumenda, nam voluptatum reprehenderit facere rerum a nemo? Quas vero repellendus reprehenderit reiciendis.</p>
+  
+  <script src="92 - array.from() e array.of().js"></script>
+  <script>
+    let arr1 = new Array(3)
+    console.log(arr1)
+
+    let arr3 = Array.of(3)
+    console.log(arr3)
+
+    let arr2 = Array.from(arr1)
+    arr2.push(4, 5)
+
+    let ps = document.querySelectorAll('p')
+    console.log(ps)
+    /* ps.forEach((p, i) => {
+      p.textContent = `${++i} - ${p.textContent}`
+    }) */
+
+    ps = Array.from(ps)
+    ps.map((p, i) => {
+      p.textContent = `${++i} - ${p.textContent}`
+    })
+
+  </script>
+</body>
+</html>

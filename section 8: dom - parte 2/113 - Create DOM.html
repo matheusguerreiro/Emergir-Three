@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create DOM</title>
+  <style>
+    .container2 {
+      background-color: lightgray;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Teste DOM</h1>
+
+  <div class="container2">
+    <p>p1</p>
+    <p>p2</p>
+    <p>p3</p>
+  </div>
+
+  <div class="container">
+    <p>teste 1</p>
+    <p>lorem <a href="#">link</a></p>
+    <p>teste 2</p>
+
+    <h2>lista</h2>
+    <ul>
+      <li>item 1</li>
+      <li>
+        item 2
+        <ul>
+          <li>item 2 a</li>
+          <li>item 2 b</li>
+          <li>item 2 c</li>
+          <li></li>
+        </ul>
+      </li>
+      <li>item <a href="#">link</a></li>
+    </ul>
+  </div>
+
+  <script>
+    
+    // criando o elemento
+    const title = document.createElement("h1")
+    // criando um id para o elemento
+    const atributo = document.createAttribute("id")
+    // colocando um nome no id do elemento
+    atributo.value = "title1"
+    // atribuindo o atributo ao elemento
+    title.setAttributeNode(atributo)
+    // criando um texto para colocar no elemento
+    const text = document.createTextNode("criar nós no DOM")
+    // colocando um conteúdo no elemento
+    title.appendChild(text)
+
+    const h2 = document.createElement("h2")
+    h2.setAttribute("class", "ch2")
+    h2.textContent = "Meu H2!"
+
+    console.log(title)
+
+    // MANEIRA DE ADD NOVOS ELEMENTOS NO DOM
+
+    // document.body.appendChild(title)
+    // document.querySelector(".container").appendChild(h2)
+
+    // document.querySelector(".container").append(h2)
+    // document.querySelector(".container").prepend(h2)
+
+    // document.querySelector(".container").firstElementChild.appendChild(h2)
+
+    // document.querySelector(".container").insertBefore(h2, document.querySelector("ul"))
+
+    const container = document.querySelector(".container")
+
+    const segundoP = container.firstElementChild.nextElementSibling.nextElementSibling
+
+    console.log(segundoP)
+
+    segundoP.after("texto com after")
+    segundoP.before("texto com before")
+
+    const container2 = document.querySelector(".container2")
+    // beforebegin, afterbegin, beforeend, afterend
+    container2.insertAdjacentHTML("afterbegin", "<h3>Aqui</h3>")
+
+    // REMOVER
+    const list = document.querySelector("ul")
+    // list.remove()
+    // list.parentElement.removeChild(list)
+
+    /* const dad = document.body
+    const novo = container.querySelector("h2")
+    const velho = document.querySelector("h1")
+    parent.replaceChild(novo, velho) */
+
+  </script>
+</body>
+</html>
