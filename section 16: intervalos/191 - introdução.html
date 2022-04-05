@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let n = 0
+        setTimeout(function(){
+            console.log('timeout')
+        }, 2000)
+
+        const intervalo = setInterval(function() {
+            console.log(`segundos ${n}`, n++)
+            if(n > 10) {
+                clearInterval(intervalo)
+            }
+        }, 1000)
+    </script>
+</body>
+</html>
