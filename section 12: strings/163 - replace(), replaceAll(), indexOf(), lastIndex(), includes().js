@@ -36,3 +36,12 @@ function mascararNT(nt) {
   return `${p1[0].padEnd(p1.length, '*')}-${p2.slice(-2).padStart(p2.length, '*')}`
 }
 console.log(mascararNT(nt))
+
+let str2 = 'hoje é sábado'
+console.log(str2.startsWith('hoje')) // começa com hoje? segundo paramentro é opcional, a partir de onde começar a procurar?
+console.log(str2.endsWith('hoje')) // termina com hoje? segundo paramentro opcional
+
+let str3 = 'abcdefgh'
+console.log(str3.charAt(1)) // retorna um char no indice informado
+
+console.log(str3.charCodeAt(1)) // retorna o unicode do caractere informado
