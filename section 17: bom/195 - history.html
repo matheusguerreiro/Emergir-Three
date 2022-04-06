@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>history</h1>
+  <button id="volta">volta</button>
+  <br>
+  <button id="avanca">avança</button>
+
+  <a href="https://www.google.com">google</a>
+
+  <script>
+    let volta = document.getElementById('volta')
+    let avanca = document.getElementById('avanca')
+
+    volta.addEventListener('click', function() {
+      history.back()
+    })
+    avanca.addEventListener('click', function() {
+      history.forward()
+    })
+
+    // location - navigator - screen
+
+    // métodos: confirm - open - close - print - prompt
+
+    // crollTo(x, y) - crollBy(x, y)
+    // propriedades úteis - pageXOffset e pageYOffset
+  </script>
+</body>
+</html>
