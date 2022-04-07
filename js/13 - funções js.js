@@ -144,3 +144,85 @@ Como as variáveis ​​locais são reconhecidas apenas dentro de suas funçõe
 
 As variáveis ​​locais são criadas quando uma função é iniciada e excluídas quando a função é concluída.
 */
+
+
+/* 
+    # Função de seta JavaScript #
+
+As funções de seta foram introduzidas no ES6.
+
+As funções de seta nos permitem escrever uma sintaxe de função mais curta:
+*/
+
+let myFunction = (a, b) => a * b;
+
+// Antes de:
+hello = function() {
+  return "Hello World!";
+}
+
+// Com função de seta:
+hello = () => {
+  return "Hello World!";
+}
+
+// Fica mais curto! Se a função tiver apenas uma instrução e a instrução retornar um valor, você poderá remover os colchetes e a returnpalavra-chave:
+
+// As funções de seta retornam o valor por padrão:
+hello = () => "Hello World!";
+
+// Função de seta com parâmetros:
+hello = (val) => "Hello " + val;
+
+// Função de seta sem parênteses:
+hello = val => "Hello " + val;
+
+
+/* 
+    # E sobre this? #
+
+O manuseio de thistambém é diferente nas funções de seta em comparação com as funções regulares.
+
+Em suma, com funções de seta não há vinculação de this.
+
+Em funções regulares, a palavra- thischave representava o objeto que chamava a função, que poderia ser a janela, o documento, um botão ou qualquer outra coisa.
+
+Com funções de seta, a palavra- thischave sempre representa o objeto que definiu a função de seta.
+
+Vamos dar uma olhada em dois exemplos para entender a diferença.
+
+Ambos os exemplos chamam um método duas vezes, primeiro quando a página é carregada e novamente quando o usuário clica em um botão.
+
+O primeiro exemplo usa uma função regular e o segundo exemplo usa uma função de seta.
+
+O resultado mostra que o primeiro exemplo retorna dois objetos diferentes (janela e botão), e o segundo exemplo retorna o objeto janela duas vezes, pois o objeto janela é o "dono" da função.
+*/
+
+// Exemplo
+// Com uma função regular thisrepresenta o objeto que chama a função:
+
+// Regular Function:
+hello = function() {
+  document.getElementById("demo").innerHTML += this;
+}
+
+// The window object calls the function:
+window.addEventListener("load", hello);
+
+// A button object calls the function:
+document.getElementById("btn").addEventListener("click", hello);
+
+
+// Exemplo
+// Com uma função de seta thisrepresenta o proprietário da função:
+
+// Arrow Function:
+hello = () => {
+  document.getElementById("demo").innerHTML += this;
+}
+
+// The window object calls the function:
+window.addEventListener("load", hello);
+
+// A button object calls the function:
+document.getElementById("btn").addEventListener("click", hello);
