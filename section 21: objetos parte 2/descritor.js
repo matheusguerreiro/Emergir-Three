@@ -35,3 +35,24 @@ console.log(Object.getOwnPropertyDescriptor(pessoa, "sobrenome"))
 for (let prop in pessoa) {
     console.log(prop)
 }
+
+
+/* 
+
+Object.getOwnPropertyDescriptor()
+
+    O método Object.getOwnPropertyDescriptor() retorna um descritor de propriedades para uma propriedade (isto é, uma diretamente presente, e não pertencente ao objeto por força da cadeia de protótipo do objeto) de um dado objeto.
+
+Sintaxe
+    Object.getOwnPropertyDescriptor(obj, prop)
+
+Parâmetros
+    obj
+        O objeto no qual deve-se procurar pela propriedade.
+    prop
+        O nome da propriedade cuja descrição é para ser retornada.
+
+Valor de Retorno
+    Um descritor de propriedades da propriedade especificada, se esta existir no objeto, ou undefined, caso contrário.
+
+*/
