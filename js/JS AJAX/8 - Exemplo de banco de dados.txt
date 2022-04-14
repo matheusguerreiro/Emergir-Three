@@ -1,0 +1,84 @@
+AJAX pode ser usado para comunicação interativa com um banco de dados.
+
+.--------------------------------.
+| Exemplo de banco de dados AJAX |
+'--------------------------------'
+
+O exemplo a seguir demonstrará como uma página da Web pode buscar informações de um banco de dados com AJAX:
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_database
+
+.---------------------------------------------.
+| Exemplo explicado - A função showCustomer() |
+'---------------------------------------------'
+
+Quando um usuário seleciona um cliente na lista suspensa acima, uma função chamada showCustomer() é executada. A função é acionada pelo onchangeevento:
+
+
+mostrarCliente
+
+  function showCustomer(str) {
+    if (str == "") {
+      document.getElementById("txtHint").innerHTML = "";
+      return;
+    }
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+      document.getElementById("txtHint").innerHTML = this.responseText;
+    }
+    xhttp.open("GET", "getcustomer.php?q="+str);
+    xhttp.send();
+  }
+
+A função showCustomer() faz o seguinte:
+
+  * Verifique se um cliente está selecionado
+  * Criar um objeto XMLHttpRequest
+  * Crie a função a ser executada quando a resposta do servidor estiver pronta
+  * Envie a solicitação para um arquivo no servidor
+  * Observe que um parâmetro (q) é adicionado à URL (com o conteúdo da lista suspensa)
+
+.---------------------------.
+| A página do servidor AJAX |
+'---------------------------'
+
+A página no servidor chamada pelo JavaScript acima é um arquivo PHP chamado "getcustomer.php".
+
+O código-fonte em "getcustomer.php" executa uma consulta em um banco de dados e retorna o resultado em uma tabela HTML:
+
+<?php
+$mysqli = new mysqli("servername", "username", "password", "dbname");
+if($mysqli->connect_error) {
+  exit('Could not connect');
+}
+
+$sql = "SELECT customerid, companyname, contactname, address, city, postalcode, country
+FROM customers WHERE customerid = ?";
+
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("s", $_GET['q']);
+$stmt->execute();
+$stmt->store_result();
+$stmt->bind_result($cid, $cname, $name, $adr, $city, $pcode, $country);
+$stmt->fetch();
+$stmt->close();
+
+echo "<table>";
+echo "<tr>";
+echo "<th>CustomerID</th>";
+echo "<td>" . $cid . "</td>";
+echo "<th>CompanyName</th>";
+echo "<td>" . $cname . "</td>";
+echo "<th>ContactName</th>";
+echo "<td>" . $name . "</td>";
+echo "<th>Address</th>";
+echo "<td>" . $adr . "</td>";
+echo "<th>City</th>";
+echo "<td>" . $city . "</td>";
+echo "<th>PostalCode</th>";
+echo "<td>" . $pcode . "</td>";
+echo "<th>Country</th>";
+echo "<td>" . $country . "</td>";
+echo "</tr>";
+echo "</table>";
+?>

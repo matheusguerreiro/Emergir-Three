@@ -1,0 +1,97 @@
+.--------------------------------------.
+| Propriedades de resposta do servidor |
+'--------------------------------------'
+
+Property	      Description
+
+responseText -- obter os dados de resposta como uma string
+responseXML --- obter os dados de resposta como dados XML
+
+.----------------------------.
+| A propriedade responseText |
+'----------------------------'
+
+A propriedade responseText retorna a resposta do servidor como uma string JavaScript e você pode usá-la adequadamente:
+
+
+Exemplo
+
+  document.getElementById("demo").innerHTML = xhttp.responseText;
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_first
+
+.---------------------------.
+| A propriedade responseXML |
+'---------------------------'
+
+O objeto XMLHttpRequest tem um analisador XML embutido.
+
+A propriedade responseXML retorna a resposta do servidor como um objeto XML DOM.
+
+Usando esta propriedade, você pode analisar a resposta como um objeto XML DOM:
+
+
+Exemplo
+
+Solicite o arquivo cd_catalog.xml e analise a resposta:
+
+  const xmlDoc = xhttp.responseXML;
+  const x = xmlDoc.getElementsByTagName("ARTIST");
+
+  let txt = "";
+  for (let i = 0; i < x.length; i++) {
+    txt += x[i].childNodes[0].nodeValue + "<br>";
+  }
+  document.getElementById("demo").innerHTML = txt;
+
+  xhttp.open("GET", "cd_catalog.xml");
+  xhttp.send();
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_responsexml
+
+.---------------------------------.
+| Métodos de resposta do servidor |
+'---------------------------------'
+
+Method                     Description
+
+getResponseHeader() ------ Retorna informações de cabeçalho específicas do recurso do servidor
+getAllResponseHeaders() -- Retorna todas as informações de cabeçalho do recurso do servidor
+
+.----------------------------------.
+| O método getAllResponseHeaders() |
+'----------------------------------'
+
+O método getAllResponseHeaders() retorna todas as informações de cabeçalho da resposta do servidor.
+
+
+Exemplo
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+      document.getElementById("demo").innerHTML =
+      this.getAllResponseHeaders();
+  }
+  xhttp.open("GET", "ajax_info.txt");
+  xhttp.send();
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_header
+
+.------------------------------.
+| O método getResponseHeader() |
+'------------------------------'
+
+O método getResponseHeader() retorna informações de cabeçalho específicas da resposta do servidor.
+
+
+Exemplo
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+      document.getElementById("demo").innerHTML =
+      this.getResponseHeader("Last-Modified");
+  }
+  xhttp.open("GET", "ajax_info.txt");
+  xhttp.send();
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_lastmodified

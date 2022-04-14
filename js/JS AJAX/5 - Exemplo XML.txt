@@ -1,0 +1,45 @@
+AJAX pode ser usado para comunicação interativa com um arquivo XML.
+
+.-------------.
+| Exemplo XML |
+'-------------'
+
+O exemplo a seguir demonstrará como uma página da Web pode buscar informações de um arquivo XML com AJAX:
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_xml2
+
+.-------------------.
+| Exemplo explicado |
+'-------------------'
+
+Quando um usuário clica no botão "Obter informações do CD" acima, a função loadDoc() é executada.
+
+A função loadDoc() cria um objeto XMLHttpRequest, adiciona a função a ser executada quando a resposta do servidor estiver pronta e envia a solicitação para o servidor.
+
+Quando a resposta do servidor está pronta, uma tabela HTML é construída, nós (elementos) são extraídos do arquivo XML e, finalmente, ele atualiza o elemento "demo" com a tabela HTML preenchida com dados XML:
+
+  function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {myFunction(this);}
+    xhttp.open("GET", "cd_catalog.xml");
+    xhttp.send();
+  }
+  function myFunction(xml) {
+    const xmlDoc = xml.responseXML;
+    const x = xmlDoc.getElementsByTagName("CD");
+    let table="<tr><th>Artist</th><th>Title</th></tr>";
+    for (let i = 0; i <x.length; i++) {
+      table += "<tr><td>" +
+      x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+      "</td><td>" +
+      x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+      "</td></tr>";
+    }
+    document.getElementById("demo").innerHTML = table;
+}
+
+.---------------.
+| O arquivo XML |
+'---------------'
+
+O arquivo XML usado no exemplo acima tem esta aparência: https://www.w3schools.com/js/cd_catalog.xml

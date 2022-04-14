@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>teste</title>
+</head>
+<body>
+  <h1>teste</h1>
+  <button type="button" onclick="carregarTeste()">Carregar Teste.json</button>
+  <p id="conteudo">...</p>
+  <script>
+    function carregarTeste() {
+      const xhttp = new XMLHttpRequest()
+      xhttp.onload = function() {
+        const meuObjeto = JSON.parse(this.responseText)
+        document.getElementById('conteudo').innerHTML = `Eu sou ${meuObjeto.nome} e tenho ${meuObjeto.idade} anos.`
+      }
+      xhttp.open('GET', 'teste.json')
+      xhttp.send()
+    }
+  </script>
+</body>
+</html>

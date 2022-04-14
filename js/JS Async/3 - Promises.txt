@@ -1,0 +1,183 @@
+"Eu prometo um resultado!"
+
+"Produzir código" é um código que pode levar algum tempo
+
+"Consumindo código" é o código que deve aguardar o resultado
+
+Uma promessa é um objeto JavaScript que vincula a produção de código e o código de consumo
+
+.-------------------------------.
+| Objeto de promessa JavaScript |
+'-------------------------------'
+
+Um objeto JavaScript Promise contém o código de produção e as chamadas para o código de consumo:
+
+
+Sintaxe da promessa
+
+  let myPromise = new Promise(function(myResolve, myReject) {
+  // "Producing Code" (May take some time)
+
+    myResolve(); // when successful
+    myReject();  // when error
+  });
+
+  // "Consuming Code" (Must wait for a fulfilled Promise)
+  myPromise.then(
+    function(value) { /* code if successful */ },
+    function(error) { /* code if some error */ }
+  );
+
+Quando o código de produção obtiver o resultado, ele deverá chamar um dos dois retornos de chamada:
+
+Resultado	 Ligar
+
+Sucesso -- myResolve(valor do resultado)
+Erro ----- myReject(objeto de erro)
+
+.------------------------------------.
+| Propriedades do objeto de promessa |
+'------------------------------------'
+
+Um objeto JavaScript Promise pode ser:
+
+  * Pendente
+  * Realizada
+  * Rejeitado
+
+
+O objeto Promise oferece suporte a duas propriedades: state e result .
+
+Enquanto um objeto Promise está "pendente" (funcionando), o resultado é indefinido.
+
+Quando um objeto Promise é "cumprido", o resultado é um valor.
+
+Quando um objeto Promise é "rejeitado", o resultado é um objeto de erro.
+
+myPromise.state  myPromise.result
+
+"pending" ------ undefined
+"fulfilled" ---- a result value
+"rejected" ----- an error object
+
+
+Você não pode acessar o estado e o resultado das propriedades da promessa .
+
+Você deve usar um método Promise para lidar com promessas.
+
+
+.--------------.
+| Prometa como |
+'--------------'
+
+Aqui está como usar uma promessa:
+
+  myPromise.then(
+    function(value) { /* code if successful */ },
+    function(error) { /* code if some error */ }
+  );
+
+
+Promise.then() recebe dois argumentos, um callback para sucesso e outro para falha.
+
+Ambos são opcionais, portanto, você pode adicionar um retorno de chamada apenas para sucesso ou falha.
+
+
+Exemplo
+
+  function myDisplayer(some) {
+    document.getElementById("demo").innerHTML = some;
+  }
+
+  let myPromise = new Promise(function(myResolve, myReject) {
+    let x = 0;
+
+  // The producing code (this may take some time)
+
+    if (x == 0) {
+      myResolve("OK");
+    } else {
+      myReject("Error");
+    }
+  });
+
+  myPromise.then(
+    function(value) {myDisplayer(value);},
+    function(error) {myDisplayer(error);}
+  );
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_promise2
+
+.-------------------------------------.
+| Exemplos de promessas de JavaScript |
+'-------------------------------------'
+
+Para demonstrar o uso de promessas, usaremos os exemplos de retorno de chamada do capítulo anterior:
+
+  * Esperando um tempo limite
+  * Aguardando um arquivo
+
+.---------------------------.
+| Esperando um tempo limite |
+'---------------------------'
+
+Exemplo usando retorno de chamada
+
+  setTimeout(function() { myFunction("I love You !!!"); }, 3000);
+
+  function myFunction(value) {
+    document.getElementById("demo").innerHTML = value;
+  }
+
+
+Exemplo usando promessa
+
+  let myPromise = new Promise(function(myResolve, myReject) {
+    setTimeout(function() { myResolve("I love You !!"); }, 3000);
+  });
+
+  myPromise.then(function(value) {
+    document.getElementById("demo").innerHTML = value;
+  });
+
+.-----------------------.
+| Aguardando um arquivo |
+'-----------------------'
+
+Exemplo usando retorno de chamada
+
+  function getFile(myCallback) {
+    let req = new XMLHttpRequest();
+    req.open('GET', "mycar.html");
+    req.onload = function() {
+      if (req.status == 200) {
+        myCallback(req.responseText);
+      } else {
+        myCallback("Error: " + req.status);
+      }
+    }
+    req.send();
+  }
+
+  getFile(myDisplayer);
+
+
+Exemplo usando promessa
+
+  let myPromise = new Promise(function(myResolve, myReject) {
+    let req = new XMLHttpRequest();
+    req.open('GET', "mycar.htm");
+    req.onload = function() {
+      if (req.status == 200) {
+        myResolve(req.response);
+      } else {
+        myReject("File not Found");
+      }
+    };
+    req.send();
+  });
+
+  myPromise.then(
+    function(value) {myDisplayer(value);},
+    function(error) {myDisplayer(error);}
+  );

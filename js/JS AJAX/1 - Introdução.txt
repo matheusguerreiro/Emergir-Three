@@ -1,0 +1,44 @@
+AJAX é o sonho de um desenvolvedor, porque você pode:
+
+Ler dados de um servidor web - após o carregamento da página
+Atualizar uma página da Web sem recarregar a página
+Envie dados para um servidor web - em segundo plano
+
+.---------------.
+| O que é AJAX? |
+'---------------'
+
+AJAX = Um JavaScript síncrono e X ML .
+
+AJAX não é uma linguagem de programação.
+
+AJAX apenas usa uma combinação de:
+
+  * Um objeto interno do navegador XMLHttpRequest(para solicitar dados de um servidor web)
+  * JavaScript e HTML DOM (para exibir ou usar os dados)
+
+AJAX é um nome enganoso. Os aplicativos AJAX podem usar XML para transportar dados, mas é igualmente comum transportar dados como texto simples ou texto JSON.
+
+O AJAX permite que as páginas da Web sejam atualizadas de forma assíncrona, trocando dados com um servidor da Web nos bastidores. Isso significa que é possível atualizar partes de uma página web, sem recarregar a página inteira.
+
+.----------------------.
+| Como funciona o AJAX |
+'----------------------'
+
+1. Um evento ocorre em uma página da web (a página é carregada, um botão é clicado)
+2. Um objeto XMLHttpRequest é criado por JavaScript
+3. O objeto XMLHttpRequest envia uma solicitação para um servidor web
+4. O servidor processa a solicitação
+5. O servidor envia uma resposta de volta à página da web
+6. A resposta é lida por JavaScript
+7. A ação adequada (como atualização de página) é realizada por JavaScript
+
+.-------------------------------------.
+| Navegadores modernos (API de busca) |
+'-------------------------------------'
+
+Os navegadores modernos podem usar a API Fetch em vez do objeto XMLHttpRequest.
+
+A interface API Fetch permite que o navegador da Web faça solicitações HTTP para servidores da Web.
+
+Se você usar o objeto XMLHttpRequest, o Fetch poderá fazer o mesmo de uma maneira mais simples.

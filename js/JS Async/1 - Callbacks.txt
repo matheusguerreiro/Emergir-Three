@@ -1,0 +1,137 @@
+"Eu vou ligar de volta mais tarde!"
+
+Um retorno de chamada é uma função passada como argumento para outra função
+
+Esta técnica permite que uma função chame outra função
+
+Uma função de retorno de chamada pode ser executada após a conclusão de outra função
+
+.----------------------.
+| Sequência de Funções |
+'----------------------'
+
+As funções JavaScript são executadas na sequência em que são chamadas. Não na sequência em que são definidos.
+
+Este exemplo acabará exibindo "Goodbye":
+
+
+Exemplo
+
+  function myFirst() {
+    myDisplayer("Hello");
+  }
+
+  function mySecond() {
+    myDisplayer("Goodbye");
+  }
+
+  myFirst();
+  mySecond();
+
+
+Este exemplo acabará exibindo "Hello":
+
+
+Exemplo
+
+  function myFirst() {
+    myDisplayer("Hello");
+  }
+
+  function mySecond() {
+    myDisplayer("Goodbye");
+  }
+
+  mySecond();
+  myFirst();
+
+.-----------------------.
+| Controle de Sequência |
+'-----------------------'
+
+Às vezes você gostaria de ter um melhor controle sobre quando executar uma função.
+
+Suponha que você queira fazer um cálculo e, em seguida, exibir o resultado.
+
+Você pode chamar uma função de calculadora (myCalculator), salvar o resultado e depois chamar outra função (myDisplayer) para exibir o resultado:
+
+
+Exemplo
+
+  function myDisplayer(some) {
+    document.getElementById("demo").innerHTML = some;
+  }
+
+  function myCalculator(num1, num2) {
+    let sum = num1 + num2;
+    return sum;
+  }
+
+  let result = myCalculator(5, 5);
+  myDisplayer(result);
+
+Ou você pode chamar uma função de calculadora (myCalculator) e deixar a função de calculadora chamar a função de exibição (myDisplayer):
+
+
+Exemplo
+
+  function myDisplayer(some) {
+    document.getElementById("demo").innerHTML = some;
+  }
+
+  function myCalculator(num1, num2) {
+    let sum = num1 + num2;
+    myDisplayer(sum);
+  }
+
+  myCalculator(5, 5);
+
+O problema com o primeiro exemplo acima é que você precisa chamar duas funções para exibir o resultado.
+
+O problema com o segundo exemplo é que você não pode impedir que a função calculadora exiba o resultado.
+
+Agora é hora de trazer um retorno de chamada.
+
+.--------------------------------.
+| Retornos de chamada JavaScript |
+'--------------------------------'
+
+Um retorno de chamada é uma função passada como um argumento para outra função.
+
+Usando um retorno de chamada, você pode chamar a função de calculadora (myCalculator) com um retorno de chamada e deixar a função de calculadora executar o retorno de chamada após o término do cálculo:
+
+
+Exemplo
+
+  function myDisplayer(some) {
+    document.getElementById("demo").innerHTML = some;
+  }
+
+  function myCalculator(num1, num2, myCallback) {
+    let sum = num1 + num2;
+    myCallback(sum);
+  }
+
+  myCalculator(5, 5, myDisplayer);
+
+No exemplo acima, myDisplayer é o nome de uma função.
+
+Ele é passado para myCalculator() como um argumento.
+
+Ao passar uma função como argumento, lembre-se de não usar parênteses.
+
+Direito: myCalculator(5, 5, myDisplayer);
+
+Errado: myCalculator(5, 5, myDisplayer());
+
+.------------------------------------.
+| Quando usar um retorno de chamada? |
+'------------------------------------'
+
+Os exemplos acima não são muito empolgantes.
+
+Eles são simplificados para ensinar a sintaxe de retorno de chamada.
+
+Onde os retornos de chamada realmente brilham são em funções assíncronas, onde uma função tem que esperar por outra função (como esperar o carregamento de um arquivo).
+
+As funções assíncronas são abordadas no próximo capítulo.

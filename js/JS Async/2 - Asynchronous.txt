@@ -1,0 +1,149 @@
+"Eu vou terminar mais tarde!"
+
+Funções executadas em paralelo com outras funções são chamadas de assíncronas
+
+Um bom exemplo é JavaScript setTimeout()
+
+.-----------------------.
+| JavaScript assíncrono |
+'-----------------------'
+
+Os exemplos usados ​​no capítulo anterior foram muito simplificados.
+
+O objetivo dos exemplos era demonstrar a sintaxe das funções de retorno de chamada:
+
+
+Exemplo
+
+  function myDisplayer(something) {
+    document.getElementById("demo").innerHTML = something;
+  }
+
+  function myCalculator(num1, num2, myCallback) {
+    let sum = num1 + num2;
+    myCallback(sum);
+  }
+
+  myCalculator(5, 5, myDisplayer);
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_callback4
+
+No exemplo acima, myDisplayer é o nome de uma função.
+
+Ele é passado para myCalculator() como um argumento.
+
+
+No mundo real, os retornos de chamada são usados ​​com mais frequência com funções assíncronas.
+
+Um exemplo típico é JavaScript setTimeout().
+
+.---------------------------.
+| Esperando um tempo limite |
+'---------------------------'
+
+Ao usar a função JavaScript setTimeout(), você pode especificar uma função de retorno de chamada a ser executada no tempo limite:
+
+
+Exemplo
+
+  setTimeout(myFunction, 3000);
+
+  function myFunction() {
+    document.getElementById("demo").innerHTML = "I love You !!";
+  }
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_callback5
+
+No exemplo acima, myFunction é usado como callback.
+
+myFunction é passado setTimeout() como argumento.
+
+3000 é o número de milissegundos antes do tempo limite, então myFunction() será chamado após 3 segundos.
+
+
+Ao passar uma função como argumento, lembre-se de não usar parênteses.
+
+Direito: setTimeout(myFunction, 3000);
+
+Errado: setTimeout(myFunction(), 3000);
+
+
+Em vez de passar o nome de uma função como argumento para outra função, você sempre pode passar uma função inteira:
+
+
+Exemplo
+
+  setTimeout(function() { myFunction("I love You !!!"); }, 3000);
+
+  function myFunction(value) {
+    document.getElementById("demo").innerHTML = value;
+  }
+
+No exemplo acima, function() { myFunction("I love You !!!"); } é usado como callback. É uma função completa. A função completa é passada para setTimeout() como um argumento.
+
+3000 é o número de milissegundos antes do tempo limite, então myFunction() será chamado após 3 segundos.
+
+.------------------------.
+| Aguardando Intervalos: |
+'------------------------'
+
+Ao usar a função JavaScript setInterval(), você pode especificar uma função de retorno de chamada a ser executada para cada intervalo:
+
+
+Exemplo
+
+setInterval(myFunction, 1000);
+
+  function myFunction() {
+    let d = new Date();
+    document.getElementById("demo").innerHTML=
+    d.getHours() + ":" +
+    d.getMinutes() + ":" +
+    d.getSeconds();
+  }
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_callback6
+
+No exemplo acima, myFunction é usado como callback.
+
+myFunction é passado setInterval() como argumento.
+
+1000 é o número de milissegundos entre os intervalos, então myFunction()será chamado a cada segundo.
+
+.---------------------.
+| Aguardando arquivos |
+'---------------------'
+
+Se você criar uma função para carregar um recurso externo (como um script ou um arquivo), não poderá usar o conteúdo antes que ele seja totalmente carregado.
+
+Este é o momento perfeito para usar um retorno de chamada.
+
+Este exemplo carrega um arquivo HTML (mycar.html) e exibe o arquivo HTML em uma página da Web, após o arquivo ser totalmente carregado:
+
+
+Aguardando um arquivo:
+
+  function myDisplayer(some) {
+    document.getElementById("demo").innerHTML = some;
+  }
+
+  function getFile(myCallback) {
+    let req = new XMLHttpRequest();
+    req.open('GET', "mycar.html");
+    req.onload = function() {
+      if (req.status == 200) {
+        myCallback(this.responseText);
+      } else {
+        myCallback("Error: " + req.status);
+      }
+    }
+    req.send();
+  }
+
+  getFile(myDisplayer);
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_callback7
+
+No exemplo acima, myDisplayer é usado como callback.
+
+myDisplayer é passado getFile() como argumento.

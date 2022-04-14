@@ -1,0 +1,210 @@
+A pedra angular do AJAX é o objeto XMLHttpRequest.
+
+  1. Criar um objeto XMLHttpRequest
+  2. Definir uma função de retorno de chamada
+  3. Abra o objeto XMLHttpRequest
+  4. Enviar uma solicitação para um servidor
+
+.-------------------------.
+| O objeto XMLHttpRequest |
+'-------------------------'
+
+Todos os navegadores modernos suportam o objeto XMLHttpRequest.
+
+O objeto XMLHttpRequest pode ser usado para trocar dados com um servidor web nos bastidores. Isso significa que é possível atualizar partes de uma página web, sem recarregar a página inteira.
+
+.--------------------------------.
+| Criar um objeto XMLHttpRequest |
+'--------------------------------'
+
+Todos os navegadores modernos (Chrome, Firefox, IE, Edge, Safari, Opera) têm um objeto XMLHttpRequest embutido.
+
+Sintaxe para criar um objeto XMLHttpRequest:
+
+  variable = new XMLHttpRequest();
+
+.------------------------------------------.
+| Definir uma função de retorno de chamada |
+'------------------------------------------'
+
+Uma função de retorno de chamada é uma função passada como parâmetro para outra função.
+
+Nesse caso, a função de retorno de chamada deve conter o código a ser executado quando a resposta estiver pronta.
+
+  xhttp.onload = function() {
+    // What to do when the response is ready
+  }
+
+.------------------.
+| Enviar um pedido |
+'------------------'
+
+Para enviar uma solicitação a um servidor, você pode usar os métodos open() e send() do objeto XMLHttpRequest:
+
+  xhttp.open("GET", "ajax_info.txt");
+  xhttp.send();
+
+
+Exemplo
+
+  // Create an XMLHttpRequest object
+  const xhttp = new XMLHttpRequest();
+
+  // Define a callback function
+  xhttp.onload = function() {
+    // Here you can use the Data
+  }
+
+  // Send a request
+  xhttp.open("GET", "2 - ajax_info.txt");
+  xhttp.send();
+
+.-----------------------.
+| Acesso entre domínios |
+'-----------------------'
+
+Por motivos de segurança, os navegadores modernos não permitem acesso entre domínios.
+
+Isso significa que tanto a página da Web quanto o arquivo XML que ela tenta carregar devem estar localizados no mesmo servidor.
+
+Os exemplos no W3Schools abrem todos os arquivos XML localizados no domínio do W3Schools.
+
+Se você quiser usar o exemplo acima em uma de suas próprias páginas da Web, os arquivos XML que você carregar devem estar localizados em seu próprio servidor.
+
+.----------------------------------.
+| Métodos de objeto XMLHttpRequest |
+'----------------------------------'
+
+Method	                               Description
+
+new XMLHttpRequest() ----------------- Cria um novo objeto XMLHttpRequest
+abort()	------------------------------ Cancela a solicitação atual
+getAllResponseHeaders() -------------- Retorna as informações do cabeçalho
+getResponseHeader() ------------------ Retorna informações específicas de cabeçalho
+open(method, url, async, user, psw) -- Especifica a solicitação
+----------------------------------------- método: ------ o tipo de solicitação GET ou POST
+----------------------------------------- url: --------- o local do arquivo
+----------------------------------------- assíncrono: -- true (assíncrono) ou false (síncrono)
+----------------------------------------- usuário: ----- nome de usuário opcional
+----------------------------------------- psw: --------- senha opcional
+send() ------------------------------- Envia a requisição para o servidor
+----------------------------------------- Usado para solicitações GET
+send(string) ------------------------- Envia a solicitação para o servidor.
+----------------------------------------- Usado para solicitações POST
+setRequestHeader() ------------------- Adiciona um par de rótulo/valor ao cabeçalho a ser enviado
+
+.---------------------------------------.
+| Propriedades do objeto XMLHttpRequest |
+'---------------------------------------'
+
+Property	            Description
+
+onload -------------- Define uma função a ser chamada quando a solicitação for recebida (carregada)
+onreadystatechange -- Define uma função a ser chamada quando a propriedade readyState muda
+readyState ---------- Mantém o status do XMLHttpRequest.
+------------------------ 0: pedido não inicializado
+------------------------ 1: conexão do servidor estabelecida
+------------------------ 2: pedido recebido
+------------------------ 3: processamento do pedido
+------------------------ 4: pedido finalizado e resposta pronta
+responseText -------- Retorna os dados de resposta como uma string
+responseXML --------- Retorna os dados de resposta como dados XML
+status -------------- Retorna o número do status de uma solicitação
+------------------------ 200: "OK"
+------------------------ 403: "Proibido"
+------------------------ 404: "não encontrado"
+statusText ---------- Retorna o texto de status (por exemplo, "OK" ou "Não encontrado")
+
+.----------------------.
+| A propriedade onload |
+'----------------------'
+
+Com o objeto XMLHttpRequest você pode definir uma função de callback para ser executada quando a requisição receber uma resposta.
+
+A função é definida na propriedade onload do objeto XMLHttpRequest:
+
+
+Exemplo
+
+  xhttp.onload = function() {
+    document.getElementById("demo").innerHTML = this.responseText;
+  }
+  xhttp.open("GET", "2 - ajax_info.txt");
+  xhttp.send();
+
+.--------------------------------------.
+| Várias funções de retorno de chamada |
+'--------------------------------------'
+
+Se você tiver mais de uma tarefa AJAX em um site, deverá criar uma função para executar o objeto XMLHttpRequest e uma função de retorno de chamada para cada tarefa AJAX.
+
+A chamada de função deve conter a URL e qual função chamar quando a resposta estiver pronta.
+
+
+Exemplo
+
+  loadDoc("url-1", myFunction1);
+
+  loadDoc("url-2", myFunction2);
+
+  function loadDoc(url, cFunction) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {cFunction(this);}
+    xhttp.open("GET", url);
+    xhttp.send();
+  }
+
+  function myFunction1(xhttp) {
+    // action goes here
+  }
+  function myFunction2(xhttp) {
+    // action goes here
+  }
+
+.----------------------------------.
+| A propriedade onreadystatechange |
+'----------------------------------'
+
+A propriedade readyState contém o status do XMLHttpRequest.
+
+A propriedade onreadystatechange define uma função de retorno de chamada a ser executada quando o readyState for alterado.
+
+A statuspropriedade e as statusTextpropriedades mantêm o status do objeto XMLHttpRequest.
+
+Property	            Description
+
+onreadystatechange -- Define uma função a ser chamada quando a propriedade readyState muda
+readyState ---------- Mantém o status do XMLHttpRequest.
+------------------------ 0: pedido não inicializado
+------------------------ 1: conexão do servidor estabelecida
+------------------------ 2: pedido recebido
+------------------------ 3: processamento do pedido
+------------------------ 4: pedido finalizado e resposta pronta
+responseText -------- Retorna os dados de resposta como uma string
+responseXML --------- Retorna os dados de resposta como dados XML
+status -------------- Retorna o número do status de uma solicitação
+------------------------ 200: "OK"
+------------------------ 403: "Proibido"
+------------------------ 404: "não encontrado"
+statusText ---------- Retorna o texto de status (por exemplo, "OK" ou "Não encontrado")
+
+A função onreadystatechange é chamada toda vez que o readyState muda.
+
+Quando readyState for 4 e o status for 200, a resposta estará pronta:
+
+
+Exemplo
+
+  function loadDoc() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("demo").innerHTML =
+        this.responseText;
+      }
+    };
+    xhttp.open("GET", "ajax_info.txt");
+    xhttp.send();
+  }
+
+O evento onreadystatechange é acionado quatro vezes (1-4), uma vez para cada alteração no readyState.

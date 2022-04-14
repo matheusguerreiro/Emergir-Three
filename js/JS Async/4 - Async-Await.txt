@@ -1,0 +1,131 @@
+"async e await tornam as promessas mais fáceis de escrever"
+
+async faz uma função retornar uma promessa
+
+await faz uma função esperar por uma promessa
+
+.--------------------.
+| Sintaxe assíncrona |
+'--------------------'
+
+A palavra-chave async antes de uma função faz com que a função retorne uma promessa:
+
+
+Exemplo
+
+  async function myFunction() {
+    return "Hello";
+  }
+
+É o mesmo que:
+
+  function myFunction() {
+    return Promise.resolve("Hello");
+  }
+
+Aqui está como usar a Promessa:
+
+  myFunction().then(
+    function(value) { /* code if successful */ },
+    function(error) { /* code if some error */ }
+  );
+
+
+Exemplo
+
+  async function myFunction() {
+    return "Hello";
+  }
+  myFunction().then(
+    function(value) {myDisplayer(value);},
+    function(error) {myDisplayer(error);}
+  );
+
+Ou mais simples, já que você espera um valor normal (uma resposta normal, não um erro):
+
+Exemplo
+
+  async function myFunction() {
+    return "Hello";
+  }
+  myFunction().then(
+    function(value) {myDisplayer(value);}
+  );
+
+.------------------.
+| Aguardar Sintaxe |
+'------------------'
+
+A palavra-chave await antes de uma função faz com que a função espere por uma promessa:
+
+  let value = await promise;
+
+A palavra-chave await só pode ser usada dentro de uma função async.
+
+
+Exemplo
+
+Vamos devagar e aprender a usá-lo.
+
+Sintaxe Básica
+
+  async function myDisplay() {
+    let myPromise = new Promise(function(resolve, reject) {
+      resolve("I love You !!");
+    });
+    document.getElementById("demo").innerHTML = await myPromise;
+  }
+
+  myDisplay();
+
+
+Os dois argumentos (resolver e rejeitar) são predefinidos pelo JavaScript.
+
+Não vamos criá-los, mas chamar um deles quando a função executora estiver pronta.
+
+Muitas vezes não precisaremos de uma função de rejeição.
+
+
+Exemplo sem rejeição
+
+  async function myDisplay() {
+    let myPromise = new Promise(function(resolve) {
+      resolve("I love You !!");
+    });
+    document.getElementById("demo").innerHTML = await myPromise;
+  }
+
+  myDisplay();
+
+
+Esperando um tempo limite
+
+  async function myDisplay() {
+    let myPromise = new Promise(function(resolve) {
+      setTimeout(function() {resolve("I love You !!");}, 3000);
+    });
+    document.getElementById("demo").innerHTML = await myPromise;
+  }
+
+  myDisplay();
+
+
+Aguardando um arquivo
+
+  async function getFile() {
+    let myPromise = new Promise(function(resolve) {
+      let req = new XMLHttpRequest();
+      req.open('GET', "mycar.html");
+      req.onload = function() {
+        if (req.status == 200) {
+          resolve(req.response);
+        } else {
+          resolve("File not Found");
+        }
+      };
+      req.send();
+    });
+    document.getElementById("demo").innerHTML = await myPromise;
+  }
+
+  getFile();

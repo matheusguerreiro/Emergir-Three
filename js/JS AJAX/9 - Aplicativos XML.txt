@@ -1,0 +1,128 @@
+Este capítulo demonstra alguns aplicativos HTML usando XML, HTTP, DOM e JavaScript.
+
+.-----------------------.
+| O documento XML usado |
+'-----------------------'
+
+Neste capítulo usaremos o arquivo XML chamado https://www.w3schools.com/js/cd_catalog.xml .
+
+.-------------------------------------.
+| Exibir dados XML em uma tabela HTML |
+'-------------------------------------'
+
+Este exemplo percorre cada elemento <CD> e exibe os valores dos elementos <ARTIST> e <TITLE> em uma tabela HTML:
+
+
+Exemplo
+
+  <table id="demo"></table>
+
+  <script>
+  function loadXMLDoc() {
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+      const xmlDoc = xml.responseXML;
+      const cd = xmlDoc.getElementsByTagName("CD");
+      myFunction(cd);
+    }
+    xmlhttp.open("GET", "cd_catalog.xml");
+    xmlhttp.send();
+  }
+
+  function myFunction(cd) {
+    let table="<tr><th>Artist</th><th>Title</th></tr>";
+    for (let i = 0; i < cd.length; i++) {
+      table += "<tr><td>" +
+      cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+      "</td><td>" +
+      cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+      "</td></tr>";
+    }
+    document.getElementById("demo").innerHTML = table;
+  }
+  </script>
+
+  </body>
+  </html>
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_display_table
+
+Para obter mais informações sobre como usar JavaScript e XML DOM, acesse https://www.w3schools.com/xml/dom_intro.asp .
+
+.----------------------------------------------.
+| Exibir o primeiro CD em um elemento div HTML |
+'----------------------------------------------'
+
+Este exemplo usa uma função para exibir o primeiro elemento CD em um elemento HTML com id="showCD":
+
+
+Exemplo
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    const xmlDoc = xhttp.responseXML;
+    const cd = xmlDoc.getElementsByTagName("CD");
+    myFunction(cd, 0);
+  }
+  xhttp.open("GET", "cd_catalog.xml");
+  xhttp.send();
+
+  function myFunction(cd, i) {
+    document.getElementById("showCD").innerHTML =
+    "Artist: " +
+    cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+    "<br>Title: " +
+    cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+    "<br>Year: " +
+    cd[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
+  }
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app_first
+
+.----------------------.
+| Navegue entre os CDs |
+'----------------------'
+
+Para navegar entre os CDs no exemplo acima, crie uma função next()and previous():
+
+
+Exemplo
+
+  function next() {
+    // display the next CD, unless you are on the last CD
+    if (i < len-1) {
+      i++;
+      displayCD(i);
+    }
+  }
+
+  function previous() {
+    // display the previous CD, unless you are on the first CD
+    if (i > 0) {
+      i--;
+      displayCD(i);
+    }
+  }
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app_navigate
+
+.-------------------------------------------------.
+| Mostrar informações do álbum ao clicar em um CD |
+'-------------------------------------------------'
+
+O último exemplo mostra como você pode mostrar as informações do álbum quando o usuário clica em um CD:
+
+
+Exemplo
+
+  function displayCD(i) {
+    document.getElementById("showCD").innerHTML =
+    "Artist: " +
+    cd[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+    "<br>Title: " +
+    cd[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+    "<br>Year: " +
+    cd[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue;
+  }
+
+https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_app

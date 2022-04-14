@@ -1,0 +1,31 @@
+.------------------.
+| Exemplos simples |
+'------------------'
+
+  Crie um XMLHttpRequest simples e recupere dados de um arquivo TXT
+    https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_first
+
+  Crie um XMLHttpRequest com uma função de retorno de chamada e recupere dados de um arquivo TXT
+    https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_callback
+
+
+.------------------------------------.
+| Solicitar informações do cabeçalho |
+'------------------------------------'
+
+  Recuperar todas as informações de cabeçalho de um recurso (arquivo)
+    https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_header
+
+  Recuperar informações de cabeçalho específicas de um recurso (arquivo)
+    https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_lastmodified
+
+
+.------------------------.
+| Solicitar arquivos XML |
+'------------------------'
+
+  Carregar um arquivo XML com AJAX
+    https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_xml
+
+  Recuperar o conteúdo de um arquivo XML
+    https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_xml2
