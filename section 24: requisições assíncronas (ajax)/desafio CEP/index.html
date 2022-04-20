@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Curso Javascript Completo</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+  <link rel="stylesheet" type="text/css" href="css/estilo.css">
+
+</head>
+
+<body>
+
+
+  <div id="bs-feedback" class="alert alert-warning alert-dismissible" role="alert">
+
+    <span class="content"></span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">X</button>
+  </div>
+
+  <div class="container">
+    <h1>Digite um CEP</h1>
+
+    <form>
+      <div class="form-group">
+        <label class="control-label" for="inputCEP">CEP</label>
+        <div class="controls">
+          <input class="form-control" type="text" id="inputCEP" placeholder="xxxxx-xxx">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label" for="inputLogradouro">Logradouro</label>
+        <div class="controls">
+          <input class="form-control" type="text" id="inputLogradouro" placeholder="Logradouro">
+          <input class="form-control" type="number" id="inputNumero" placeholder="Numero">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="inputBairro">Bairro</label>
+        <div class="controls">
+          <input class="form-control" type="text" id="inputBairro" placeholder="Bairro">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="inputCidade">Cidade</label>
+        <div class="controls">
+          <input class="form-control" type="text" id="inputCidade" placeholder="Cidade">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="inputEstado">Estado</label>
+        <div class="controls">
+          <input class="form-control" type="text" id="inputEstado" placeholder="Estado">
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+</body>
+
+<script>
+
+      // URL: https://viacep.com.br/ws/03133000/json/    
+      
+      // const regexCEP = /^\d{5}\-?\d{3}$/
+
+      const inputCEP = document.getElementById('inputCEP')
+      
+      inputCEP.addEventListener('input', function(e) {
+        // e.preventDefault()
+        let cep = this.value // this é o próprio inputCEP
+        cep = cep.replace('-', '').trim()
+        if (cep.length === 8) {
+          const promise = obterEndereco(cep)
+          .then((dado) => {
+            if (dado.erro) {
+              throw Error('CEP Inexistente!')
+            }
+            mostrarEndereco(dado)
+          })
+          .catch((erro) => {
+            mostrarErro(erro.message)
+          })
+        }
+      })
+
+      /* function mostrarEndereco(dados) {
+        console.log(dados)
+        document.getElementById('inputLogradouro').value = dados.logradouro
+        document.getElementById('inputBairro').value = dados.bairro
+        document.getElementById('inputCidade').value = dados.localidade
+        document.getElementById('inputEstado').value = dados.uf
+      } */
+
+      // OU extraindo o que se precisa do objeto passado por parametro
+
+      function mostrarEndereco({logradouro, bairro, localidade, uf}) {
+        document.getElementById('inputLogradouro').value = logradouro
+        document.getElementById('inputBairro').value = bairro
+        document.getElementById('inputCidade').value = localidade
+        document.getElementById('inputEstado').value = uf
+      }
+
+      function mostrarErro(erro) {
+        document.querySelector('#bs-feedback .content').textContent = erro
+        document.querySelector('#bs-feedback').style.transform = 'translate(0)'
+      }
+
+      document.querySelector('#bs-feedback .close').addEventListener('click', function() {
+        esconderErro()
+      })
+
+      function esconderErro() {
+        document.querySelector('#bs-feedback').removeAttribute('style')
+      }
+
+      /* function obterEndereco(cep) {
+        let url = `https://viacep.com.br/ws/${cep}/json/`
+        return fetch(url)
+          .then((resposta) => {
+            if (!resposta.ok) {
+              throw Error('CEP Inválido!')
+            }
+            return resposta
+          })
+          .then((resposta) => {
+            return resposta.json()
+          })
+          .catch((erro) => {
+            throw Error('Deu erro no Servidor!')
+          })
+      } */
+      /* o primeiro .then verifica se a resposta está ok, se tiver ok ele retorna a resposta para o outro .then para então fazer o método json(). ctrl + c, ctrl + v. sempre será assim quando usar fetch! */
+
+      async function obterEndereco(cep) {
+        let url = `https://viacep.com.br/ws/${cep}/json/`
+        
+        try {
+          const resposta = await fetch(url)
+          if (!resposta.ok) {
+            throw Error('CEP Inválido!')
+          }
+          const json = await resposta.json()
+          return json
+        } catch (error) {
+          console.log(error)
+          throw Error('Deu alguma Zebra...')
+        }
+      }      
+
+
+
+</script>
+
+</html>
